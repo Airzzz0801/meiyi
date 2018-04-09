@@ -1,7 +1,11 @@
 package com.crm.controller;
 
+import com.crm.service.testService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author taojiajian@meizemeiyi.com
@@ -9,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class testController {
-        @RequestMapping("hello")
-        public String test1(){
-            return "hello";
+    @Autowired
+    private testService testService;
+        @RequestMapping("say.do")
+        @ResponseBody
+        public ModelAndView test1(){
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("message",testService.testget());
+            modelAndView.setViewName("hello");
+            System.out.println(testService.testget()+"dododo");
+            return modelAndView;
         }
 }
